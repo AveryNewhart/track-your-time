@@ -12,3 +12,28 @@
   justify-content: center;
   align-items: center;
 }
+
+input {
+  height: 35px;
+  width: 165px;
+  background-color: purple;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid green;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+li {
+  margin-top: 15px;
+}
+
+button {
+  height: 30px;
+  width: 60px;
+  background-color: orange;
+  color: blue;
+  font-size: 1.05rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
