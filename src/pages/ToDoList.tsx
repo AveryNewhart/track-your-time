@@ -1,15 +1,68 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 
-export const ToDoList = () => {
+interface Item {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+export const ToDoList: React.FC = () => {
+  const [todos, setTodos] = useState<Item[]>([]);
+  const [input, setInput] = useState<string>('');
+
+  useEffect(() => {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+      const parsedTodos: Item[] = JSON.parse(storedTodos);
+      setTodos(parsedTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const handleToggle = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      })
+    );
+  };
+
+  const handleClick = () => {
+    const newTodo: Item = { id: Date.now(), text: input, completed: false };
+    setTodos([...todos, newTodo]);
+    setInput('');
+  };
+
+  const persistedTodos = todos.filter((todo) => !todo.completed);
+
   return (
     <div className="main-container">
       <h1>To Do List</h1>
       <ul>
-        <li>item 1</li>
-        <li>item 2</li>
+        {persistedTodos.map((todo) => (
+          <li
+            key={todo.id}
+            onClick={() => handleToggle(todo.id)}
+            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+          >
+            {todo.text}
+          </li>
+        ))}
       </ul>
-      <input type="text" placeholder="Add Item" />
-      <button>Add</button>
+      <input
+        type="text"
+        placeholder="Add Item"
+        value={input}
+        onChange={(e) => setInput(e.currentTarget.value)}
+      />
+      <button onClick={handleClick}>Add</button>
     </div>
-  )
-}
+  );
+};
+
