@@ -14,7 +14,8 @@ export const ToDoList: React.FC = () => {
     const storedTodos = localStorage.getItem('todos');
     if (storedTodos) {
       const parsedTodos: Item[] = JSON.parse(storedTodos);
-      setTodos(parsedTodos);
+      const nonCompletedTodos = parsedTodos.filter(todo => !todo.completed);
+      setTodos(nonCompletedTodos);
     }
   }, []);
 
@@ -39,13 +40,11 @@ export const ToDoList: React.FC = () => {
     setInput('');
   };
 
-  const persistedTodos = todos.filter((todo) => !todo.completed);
-
   return (
     <div className="main-container">
       <h1>To Do List</h1>
       <ul>
-        {persistedTodos.map((todo) => (
+        {todos.map((todo) => (
           <li
             key={todo.id}
             onClick={() => handleToggle(todo.id)}
@@ -65,4 +64,3 @@ export const ToDoList: React.FC = () => {
     </div>
   );
 };
-
