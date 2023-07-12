@@ -42,13 +42,14 @@ export const ToDoList: React.FC = () => {
 
   return (
     <div className="main-container">
-      <h1>To Do List</h1>
+      <h1 className='bigHone'>To Do List</h1>
       <ul>
         {todos.map((todo) => (
           <li
             key={todo.id}
             onClick={() => handleToggle(todo.id)}
             style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            className="bigLi"
           >
             {todo.text}
           </li>
@@ -59,8 +60,9 @@ export const ToDoList: React.FC = () => {
         placeholder="Add Item"
         value={input}
         onChange={(e) => setInput(e.currentTarget.value)}
+        className="bigInput"
       />
-      <button onClick={handleClick}>Add</button>
+      <button className="bigButton" onClick={handleClick}>Add</button>
     </div>
   );
 };

@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-input {
+.bigInput {
   height: 35px;
   width: 165px;
   background-color: purple;
@@ -26,11 +26,12 @@ input {
   text-align: center;
 }
 
-li {
+.bigLi {
   margin-top: 15px;
+  list-style: none;
 }
 
-button {
+.bigButton {
   height: 30px;
   width: 60px;
   background-color: orange;
@@ -42,13 +43,13 @@ button {
   border: 1px solid blue;
 }
 
-button:hover {
+.bigButton:hover {
   background-color: blue;
   color: orange;
   border: 1px solid orange;
 }
 
-h1 {
+.bigHone {
   color: orange;
   background-color: blue;
   padding: 10px;
